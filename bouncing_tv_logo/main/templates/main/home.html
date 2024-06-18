@@ -1,0 +1,70 @@
+<!-- bounce/templates/bounce/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Logo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color:pink;
+        }
+        #logo {
+            position: absolute;
+            width: 120px;
+            height: 54px;
+            background-image: url('/static/main/logo.png'); /* Ensure the path is correct */
+            background-size: cover;
+
+
+        }
+        #title{
+            position: absolute;
+            top: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">Bounce</h1>
+    <div id="logo"></div>
+    <script>
+        const logo = document.getElementById('logo');
+        let x = 1000; // Start with an initial value
+        let y = 500; // Start with an initial value
+        let dx = 2;
+        let dy = 3;
+
+        function bounce() {
+            const rect = logo.getBoundingClientRect();
+            const bodyRect = document.body.getBoundingClientRect();
+
+            if (rect.left <= bodyRect.left || rect.right >= bodyRect.right ) {
+                dx = -dx;
+            }
+
+            if (rect.top <= bodyRect.top ||  rect.bottom >= 1000) {
+                dy = -dy;
+            }
+
+
+
+
+
+            x += dx;
+            y += dy;
+
+            logo.style.left = x + 'px';
+            logo.style.top = y + 'px';
+
+            requestAnimationFrame(bounce);
+        }
+
+        bounce();
+    </script>
+</body>
+</html>
